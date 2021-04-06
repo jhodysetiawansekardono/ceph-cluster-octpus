@@ -6,6 +6,7 @@ Saya akan men-deploy ceph menggunakan vm deployer sesuai topology dibawah ini:
 
 ![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/c7b5242bd29d78fee52510cc7e58686553e65d35/resources/topology.jpg)
 
+
 Pertama-tama saya akan menginstalasi ceph-deploy pada vm deployer dengan command berikut
 
 ```
@@ -29,6 +30,7 @@ Jangan lupa edit /etc/hosts supaya antar vm bisa terhubung dengan menggunakan ho
 10.10.10.12 server2
 10.10.10.13 server3
 ```
+
 Supaya lebih praktis tambahkan konfigurasi sudo tanpa password di setiap node dengan perintah ini
 
 ```
@@ -62,6 +64,7 @@ ceph-deploy install --release octopus server1 server2 server3
 
 ![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/229ac7aa0268c1b2f632ca659b40a2ba95de0741/screenshots/08.png)
 
+
 Perintah berikut untuk melihat versi ceph yang ter-install
 
 ```
@@ -69,6 +72,7 @@ sudo ceph --version
 ```
 
 ![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/229ac7aa0268c1b2f632ca659b40a2ba95de0741/screenshots/09.png)
+
 
 Setelah itu buat cluster beranggotakan node server
 
@@ -78,7 +82,9 @@ ceph-deploy new server1 server2 server3
 
 ![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/229ac7aa0268c1b2f632ca659b40a2ba95de0741/screenshots/10.png)
 
+
 Pada ceph.conf konfigurasi yang sudah dilakukan tadi akan diletakan pada directory dimana perintah dijalankan
+
 
 ![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/229ac7aa0268c1b2f632ca659b40a2ba95de0741/screenshots/11.png)
 
@@ -89,6 +95,7 @@ ceph-deploy mon create-initial
 ```
 
 ![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/229ac7aa0268c1b2f632ca659b40a2ba95de0741/screenshots/12.png)
+
 
 Berikut adalah outputnya
 
