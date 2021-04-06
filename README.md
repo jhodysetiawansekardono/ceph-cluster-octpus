@@ -61,3 +61,18 @@ ceph-deploy install --release octopus server1 server2 server3
 ```
 
 ![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/229ac7aa0268c1b2f632ca659b40a2ba95de0741/screenshots/8.png)
+
+Perintah berikut untuk melihat versi ceph yang ter-install
+
+```
+sudo ceph --version
+```
+
+![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/229ac7aa0268c1b2f632ca659b40a2ba95de0741/screenshots/9.png)
+
+Setelah itu buat cluster beranggotakan node server
+
+```
+ceph-deploy new server1 server2 server3
+```
+
