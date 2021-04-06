@@ -29,3 +29,35 @@ Jangan lupa edit /etc/hosts supaya antar vm bisa terhubung dengan menggunakan ho
 10.10.10.12 server2
 10.10.10.13 server3
 ```
+Supaya lebih praktis tambahkan konfigurasi sudo tanpa password di setiap node dengan perintah ini
+
+```
+echo "student ALL = (root) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/student
+sudo chmod 0440 /etc/sudoers.d/student
+```
+
+Buat juga ssh dengan menggunakan otentikasi kunci kriptografi lalu bagikan ke node server
+
+```
+ssh-keygen
+ssh-copy-id server1
+ssh-copy-id server2
+ssh-copy-id server3
+```
+
+## MEMBUAT CLUSTER
+
+Pada node deployer buatlah sebuah directory yang akan menampung file konfigurasi dengan perintah berikut
+
+```
+mkdir my-cluster
+cd my-cluster
+```
+
+Selanjutnya saya tinggal menginstalasi ceph octopus pada node deployer dengan perintah berikut lalu tunggu sampai selesai
+
+```
+ceph-deploy install --release octopus server1 server2 server3
+```
+
+![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/229ac7aa0268c1b2f632ca659b40a2ba95de0741/screenshots/8.png)
