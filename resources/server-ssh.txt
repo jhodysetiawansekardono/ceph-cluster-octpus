@@ -1,0 +1,9 @@
+ssh access
+- ip address: 138.201.120.218
+- user: student
+- password: kata sandi
+- port:
+    deployer 1019
+    server1 1011
+    server2 1012
+    server3 1013
