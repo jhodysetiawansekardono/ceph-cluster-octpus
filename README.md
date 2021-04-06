@@ -100,3 +100,81 @@ ceph-deploy mon create-initial
 Berikut adalah outputnya
 
 ![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/5068d37c87820416ce70ae5ca39f17f64c00ede5/screenshots/13.png)
+
+
+Copy file konfigurasi admin key ke node server
+
+![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/5068d37c87820416ce70ae5ca39f17f64c00ede5/screenshots/14.png)
+
+
+Deploy ceph manager pada node server1
+
+```
+ceph-deploy mgr create server1
+```
+
+![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/5068d37c87820416ce70ae5ca39f17f64c00ede5/screenshots/15.png)
+
+
+Kemudian deploy ceph object storage daemon pada node server
+
+```
+ceph-deploy osd create --data /dev/vdb server1
+ceph-deploy osd create --data /dev/vdc server1
+ceph-deploy osd create --data /dev/vdd server1
+ceph-deploy osd create --data /dev/vdb server2
+ceph-deploy osd create --data /dev/vdc server2
+ceph-deploy osd create --data /dev/vdd server2
+ceph-deploy osd create --data /dev/vdb server3
+ceph-deploy osd create --data /dev/vdc server3
+ceph-deploy osd create --data /dev/vdd server3
+```
+
+![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/5068d37c87820416ce70ae5ca39f17f64c00ede5/screenshots/16.png)
+
+
+Gunakan perintah ini untuk mengecek cluster health
+
+```
+ssh server1 sudo ceph health
+ssh server1 sudo ceph -s
+```
+
+![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/5068d37c87820416ce70ae5ca39f17f64c00ede5/screenshots/17.png)
+
+
+Untuk high-avability saya akan menambahkan node server2 dan server3 untuk menjadi ceph monitor
+
+```
+ceph-deploy mon add server2
+ceph-deploy mon add server3
+```
+
+![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/5068d37c87820416ce70ae5ca39f17f64c00ede5/screenshots/18.png)
+
+
+Gunakan perintah ini untuk mengecek status quorum
+
+```
+ssh server1 sudo ceph quorum_status --format json-pretty
+```
+
+![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/5068d37c87820416ce70ae5ca39f17f64c00ede5/screenshots/19.png)
+
+
+Deploy juga ceph manager pada node server2 dan node server3 untuk high avability
+
+```
+ceph-deploy mgr create server2 server3
+```
+
+![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/5068d37c87820416ce70ae5ca39f17f64c00ede5/screenshots/20.png)
+
+
+Selanjutnya gunakan perintah berikut untuk melihat standby manager
+
+```
+ssh server1 sudo ceph -s
+```
+
+![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/5068d37c87820416ce70ae5ca39f17f64c00ede5/screenshots/21.png)
