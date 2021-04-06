@@ -62,7 +62,7 @@ Selanjutnya saya tinggal menginstalasi ceph octopus pada node deployer dengan pe
 ceph-deploy install --release octopus server1 server2 server3
 ```
 
-![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/229ac7aa0268c1b2f632ca659b40a2ba95de0741/screenshots/08.png)
+![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/5068d37c87820416ce70ae5ca39f17f64c00ede5/screenshots/08.png)
 
 
 Perintah berikut untuk melihat versi ceph yang ter-install
@@ -71,7 +71,7 @@ Perintah berikut untuk melihat versi ceph yang ter-install
 sudo ceph --version
 ```
 
-![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/229ac7aa0268c1b2f632ca659b40a2ba95de0741/screenshots/09.png)
+![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/5068d37c87820416ce70ae5ca39f17f64c00ede5/screenshots/09.png)
 
 
 Setelah itu buat cluster beranggotakan node server
@@ -80,13 +80,13 @@ Setelah itu buat cluster beranggotakan node server
 ceph-deploy new server1 server2 server3
 ```
 
-![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/229ac7aa0268c1b2f632ca659b40a2ba95de0741/screenshots/10.png)
+![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/5068d37c87820416ce70ae5ca39f17f64c00ede5/screenshots/10.png)
 
 
 Pada ceph.conf konfigurasi yang sudah dilakukan tadi akan diletakan pada directory dimana perintah dijalankan
 
 
-![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/229ac7aa0268c1b2f632ca659b40a2ba95de0741/screenshots/11.png)
+![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/5068d37c87820416ce70ae5ca39f17f64c00ede5/screenshots/11.png)
 
 Selanjutnya deploy mon initial dengan perintah
 
@@ -94,9 +94,9 @@ Selanjutnya deploy mon initial dengan perintah
 ceph-deploy mon create-initial
 ```
 
-![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/229ac7aa0268c1b2f632ca659b40a2ba95de0741/screenshots/12.png)
+![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/5068d37c87820416ce70ae5ca39f17f64c00ede5/screenshots/12.png)
 
 
 Berikut adalah outputnya
 
-![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/229ac7aa0268c1b2f632ca659b40a2ba95de0741/screenshots/13.png)
+![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/5068d37c87820416ce70ae5ca39f17f64c00ede5/screenshots/13.png)
