@@ -143,6 +143,8 @@ ssh server1 sudo ceph -s
 ![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/5068d37c87820416ce70ae5ca39f17f64c00ede5/screenshots/17.png)
 
 
+## IMPROVE RELIABILITY DAN AVAILABILITY
+
 Untuk high-avability saya akan menambahkan node server2 dan server3 untuk menjadi ceph monitor
 
 ```
@@ -178,3 +180,102 @@ ssh server1 sudo ceph -s
 ```
 
 ![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/5068d37c87820416ce70ae5ca39f17f64c00ede5/screenshots/21.png)
+
+
+Deploy Rados Gateway pada node server1 sebagai opsional saja
+
+```
+ceph-deploy rgw create server1
+```
+
+![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/5068d37c87820416ce70ae5ca39f17f64c00ede5/screenshots/22.png)
+
+
+Secara default rgw akan menggunakan port 7480 untuk berkomunikasi yang bisa diganti dengan mengkonfigurasi ceph.conf
+
+```
+[client.rgw.server1]
+rgw_frontends = "civetweb port=80"
+```
+
+![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/5068d37c87820416ce70ae5ca39f17f64c00ede5/screenshots/23.png)
+
+
+Kemudian push update file konfigurasi dengan perintah
+
+```
+ceph-deploy --overwrite-conf config push server1
+```
+
+![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/5068d37c87820416ce70ae5ca39f17f64c00ede5/screenshots/24.png)
+
+
+Lalu restart service-nya
+
+```
+ssh server1 sudo systemctl restart ceph-radosgw@rgw.server1.service
+```
+
+atau dengan perintah
+
+```
+sudo service radosgw restart id=rgw.server1
+```
+kemudian cek gateway
+
+```
+curl server1:80
+```
+
+![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/5068d37c87820416ce70ae5ca39f17f64c00ede5/screenshots/25.png)
+
+
+## CEPH DASHBOARD
+
+Lakukan instalasi ceph dashboard dengan perintah berikut pada node server1
+
+```
+sudo apt install ceph-mgr-dashboard
+```
+
+![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/5068d37c87820416ce70ae5ca39f17f64c00ede5/screenshots/26.png)
+
+
+Selanjutnya konfigurasi ip address dan port yang akan digunakan
+
+```
+sudo ceph config set mgr mgr/dashboard/ssl false
+sudo ceph config set mgr mgr/dashboard/server_addr ::
+sudo ceph config set mgr mgr/dashboard/server_port 8080
+sudo ceph mgr module enable dashboard --force
+sudo ceph dashboard create-self-signed-cert
+```
+
+Cek ceph dashboard apakah sudah berjalan
+
+```
+sudo ceph mgr services
+sudo ceph mgr module ls
+```
+
+![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/5068d37c87820416ce70ae5ca39f17f64c00ede5/screenshots/27.png)
+
+
+Selanjutnya buat username untuk login ke ceph dashboard
+
+```
+sudo ceph dashboard ac-user-create admin -i admin-dashboard-password administrator
+```
+
+![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/5068d37c87820416ce70ae5ca39f17f64c00ede5/screenshots/28.png)
+
+
+Koneksikan ceph dashboard dengan menggunakan ssh tunnel dengan perintah
+
+```
+ssh -v -L 8080:127.0.0.1:8080 student@138.201.120.218 -p 1011
+```
+
+Lalu login dengan username dan password yang sudah dibuat tadi
+
+![](https://github.com/jhodysetiawansekardono/ceph-cluster-octpus/blob/5068d37c87820416ce70ae5ca39f17f64c00ede5/screenshots/29.png)
